@@ -26,8 +26,14 @@ function love.keypressed(key)
         return
     end
 
-    if currentScreen == "game" and game.keypressed then
-        return game.keypressed(key)
+       if currentScreen == "game" and game.keypressed then
+        local res = game.keypressed(key)
+        if res == "back" then
+            if game.leave then game.leave() end
+            currentScreen = "title"
+            return
+        end
+        return
     end
 
     if currentScreen == "title" then
@@ -142,33 +148,4 @@ function love.draw()
     end
 end
 
-function love.mousepressed(mx, my, button)
-function love.update(dt)
-    if currentScreen == "title" then
-        local mx, my = love.mouse.getPosition()
-        for i, r in ipairs(menuRects) do
-            if mx >= r.x and mx <= r.x + r.w and my >= r.y and my <= r.y + r.h then
-                menuChoice = i
-                break
-            end
-        end
-    end
-    if button ~= 1 then return end
-    if currentScreen ~= "title" then return end
-    computeMenuRects()
-    for i, r in ipairs(menuRects) do
-        if mx >= r.x and mx <= r.x + r.w and my >= r.y and my <= r.y + r.h then
-            menuChoice = i
-            if menu[i] == "New Game" then
-                currentScreen = "game"
-                if game.enter then game.enter() end
-            elseif menu[i] == "Settings" then
-                currentScreen = "settings"
-            elseif menu[i] == "Close Game" then
-                love.event.quit()
-            end
-                break
-            end
-        end
-    end
-end
+
