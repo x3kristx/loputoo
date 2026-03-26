@@ -41,7 +41,7 @@ weapon.bow = {
 }
 
 weapon.grimoire = {
-    name = "Grimoire"
+    name = "Grimoire",
     damage = function()
         return math.random(4, 12)
     end,
@@ -105,4 +105,27 @@ weapon.rapier = {
         { name = "Riposte", block = function() print("You riposte the attack with your rapier!") end },
     }
 }
+
+weapon.knife = {
+    name = "Knife",
+    damage = function()
+        return math.random(2, 5)
+    end,
+    skills = {
+        { name = "Stab", damage = function() return math.random(5, 10) end },
+        { name = "Dodge", block = function() print("You dodge the attack with your knife!") end },
+    }
+}       
+
+weapon.staff = {
+    name = "Staff",
+    damage = function()
+        return math.random(4, 10)
+    end,
+    skills = {
+        { name = "Arcane Blast", damage = function() return math.random(8, 16) end },
+        { name = "Block", block = function() print("You block the attack with your staff!") end },
+    }
+}
+return weapon
 
